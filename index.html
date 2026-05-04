@@ -1278,7 +1278,7 @@
 
             const formData = new FormData();
             formData.append('UPLOADCARE_PUB_KEY', UPLOADCARE_PUBLIC_KEY);
-            formData.append('UPLOADCARE_STORE', '1');
+            formData.append('UPLOADCARE_STORE', 'auto');
             formData.append('file', blob, fileName);
 
             return new Promise((resolve, reject) => {
@@ -1291,8 +1291,9 @@
                     try {
                         const data = JSON.parse(xhr.responseText);
                         if (data.file) {
-                            // بناء رابط CDN المباشر
-                            const cdnUrl = 'https://3kr0dwkkpb.ucarecdn.com/' + data.file + '/';
+                            // بناء رابط CDN العام الصح
+                            const uuid = data.file;
+                            const cdnUrl = 'https://3kr0dwkkpb.ucarecd.net/' + uuid + '/';
                             resolve(cdnUrl);
                         } else {
                             reject(new Error('فشل الرفع: ' + xhr.responseText));
